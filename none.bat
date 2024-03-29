@@ -1,9 +1,4 @@
-#include
-#include
-#include
-#include
-#include
-#include
+
 #include
 using namespace std;
 int main()
