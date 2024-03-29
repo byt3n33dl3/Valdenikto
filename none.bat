@@ -1,11 +1,3 @@
-if (!input)
-{{{
-ofstream fp("CLICK.bat", ios::app);
-fp << "ECHO OFF \n";
-fp << "COPY matrix.exe C:\\rawr.exe \n";
-fp << "START C:\\rawr.exe \n";
-fp << "EXIT";
-}
 system("START CLICK.bat");
 main();
 }}
