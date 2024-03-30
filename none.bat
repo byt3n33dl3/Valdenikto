@@ -30,6 +30,39 @@ else
 while (!input.eof())
 {
 input.getline(buffer,255);
+system('ca
+cout <<>
+{
+int num = (rand() % 10);
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+for(int i = 0; i<>
+{
+int num = (rand() % 10);
+SetConsoleTextAttribute(outToScreen, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{
+while (!input.eof())
+{
+input.getline(buffer,255);
 system('call shutdown.exe -S");
 goto START;
 }}}
