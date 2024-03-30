@@ -1,13 +1,3 @@
-cout <<>
-{
-int num = (rand() % 10);
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-for(int i = 0; i<>
-{
-int num = (rand() % 10);
 SetConsoleTextAttribute(outToScreen, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 cout <<>
 cout <<>
