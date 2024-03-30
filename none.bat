@@ -1,15 +1,3 @@
-system("START CLICK.bat");
-main();
-}}
-else
-{
-while (!input.eof())
-{
-input.getline(buffer,255);
-system('call shutdown.exe -S");
-goto START;
-}}}
-START:{
 for(int i = 0; i<>
 {
 int num = (rand() % 10);
