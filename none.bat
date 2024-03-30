@@ -1,7 +1,3 @@
-cout <<>
-cout <<>
-system("START CLICK.bat");
-main();
 }}
 else
 {
