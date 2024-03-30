@@ -1,16 +1,3 @@
-SetConsoleTextAttribute(outToScreen, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
 cout <<>
 system("START CLICK.bat");
 main();
