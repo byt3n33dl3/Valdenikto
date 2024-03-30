@@ -1,3 +1,22 @@
+system('ca
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{
+while (!input.eof())
+{
 }}
 else
 {
