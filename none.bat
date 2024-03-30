@@ -77,6 +77,85 @@ input.getline(buffer,255);
 system('ca
 cout <<>
 cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{
+while (!input.eof())
+{
+input.getline(buffer,255);
+system('ca
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{
+while (!input.eof())
+{
+}}
+else
+{
+while (!input.eof())
+{
+input.getline(buffer,255);
+system('ca
+cout <<>
+cout <<>
 else
 cout <<>
 cout <<>
