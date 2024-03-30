@@ -1,12 +1,3 @@
-system('ca
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
 cout <<>
 cout <<>
 cout <<>
