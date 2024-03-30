@@ -21,6 +21,29 @@ cout <<>
 cout <<>
 system("START CLICK.bat");
 main();
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
+}}
+else
+{
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+cout <<>
+system("START CLICK.bat");
+main();
 }}
 else
 {
