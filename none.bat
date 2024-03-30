@@ -1,36 +1,6 @@
 cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-for(int i = 0; i<>
 {
 int num = (rand() % 10);
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-for(int i = 0; i<>
-{
-int num = (rand() % 10);
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-cout <<>
-for(int i = 0; i<>
-{
-int num = (rand() % 10);
-cout <<>
-cout <<>
-cout <<>
 cout <<>
 cout <<>
 cout <<>
