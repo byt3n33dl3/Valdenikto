@@ -31,6 +31,7 @@ cout <<>
 cout <<>
 cout <<>
 cout <<>
+cout <<>
 system("START DOUBLECLICK.bat");
 main();
 }}
