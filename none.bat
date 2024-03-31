@@ -33,6 +33,7 @@ cout <<>
 cout <<>
 cout <<>
 cout <<>
+cout <<>
 system("START CLICK.bat");
 main();
 cout <<>
