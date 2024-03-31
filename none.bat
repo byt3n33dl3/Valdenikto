@@ -33,7 +33,7 @@ cout <<>
 cout <<>
 cout <<>
 cout <<>
-system("START CLICK.bat");
+system("START DOUBLECLICK.bat");
 main();
 }}
 else
