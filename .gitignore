@@ -4,5 +4,5 @@
 *.sublime-project
 *.sublime-workspace
 tags
-nikto.conf
+valdenikto.conf
 .vscode
