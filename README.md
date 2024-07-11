@@ -137,5 +137,5 @@ Basic usage:
 
 # Thanks to:
 
-- >Chris sullo
+- >Chris sullo ( for making nikto )
 - Gangsta Crew
