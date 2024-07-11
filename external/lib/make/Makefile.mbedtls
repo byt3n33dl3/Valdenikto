@@ -1,0 +1,24 @@
+MBEDTLS_VERSION=2.23.0
+
+MBEDTLS_ENV=
+ifneq (,$(findstring mingw,$(TARGET)))
+    MBEDTLS_ENV=WINDOWS=1
+endif
+
+$(BUILD)/lib/libmbedtls.a: $(TOOLS)
+	@echo "Unpacking mbedtls for $(BUILD)"
+	@mkdir -p $(BUILD)/lib
+	@mkdir -p $(BUILD)/include
+	@cd $(BUILD); \
+		rm -fr $(BUILD)/mbedtls; \
+		$(TAR) zxf $(DEPS)/mbedtls-$(MBEDTLS_VERSION).tar.gz; \
+		mv mbedtls-$(MBEDTLS_VERSION) mbedtls; \
+		cp $(DEPS)/mbedtls-config.h mbedtls/include/mbedtls/config.h; \
+		sed -ibak 's/-no_warning_for_no_symbols//' mbedtls/library/Makefile
+	@echo "Building mbedtls for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/mbedtls; \
+		$(ENV) $(MBEDTLS_ENV) $(MAKE) lib $(LOGBUILD); \
+		cp -r library/*.a $(BUILD)/lib ; \
+		cp -r include/mbedtls $(BUILD)/include
+
+mbedtls: $(BUILD)/lib/libmbedtls.a

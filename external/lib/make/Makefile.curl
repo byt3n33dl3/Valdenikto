@@ -1,0 +1,61 @@
+LIBCURL_VERSION=7.71.1
+
+LIBCURL_DEPS = $(TOOLS) $(BUILD)/lib/libz.a
+LIBCURL_ENV =
+LIBCURL_OPTS =
+
+#ifneq (,$(findstring darwin,$(BUILD)))
+#    LIBCURL_OPTS += --with-darwinssl
+#else
+    ifneq (,$(findstring mingw,$(BUILD)))
+        LIBCURL_OPTS += --without-ssl --with-winssl
+    else
+        LIBCURL_DEPS += $(BUILD)/lib/libmbedtls.a
+        LIBCURL_OPTS += --without-ssl --with-mbedtls=$(BUILD)
+    endif
+#endif
+
+$(BUILD)/curl/configure:
+	@echo "Unpacking curl for $(TARGET)"
+	@mkdir -p $(BUILD)
+	@cd $(BUILD); \
+		rm -fr $(BUILD)/curl; \
+		$(TAR) zxf $(DEPS)/curl-$(LIBCURL_VERSION).tar.gz; \
+		mv curl-$(LIBCURL_VERSION) curl
+
+$(BUILD)/lib/libcurl.a: $(LIBCURL_DEPS) $(BUILD)/curl/configure
+	@echo "Configuring curl for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/curl; \
+		$(CONFIG_FIXUP) \
+		$(LIBCURL_ENV) $(ENV) ./$(CONFIGURE) \
+		$(LIBCURL_OPTS) \
+		--without-libpsl \
+		--enable-optimize \
+		--disable-dict  \
+		--disable-gopher  \
+		--disable-ftp  \
+		--without-libidn2 \
+		--disable-imap  \
+		--disable-ldap  \
+		--disable-ldaps  \
+		--disable-pop3  \
+		--disable-proxy  \
+		--disable-rtsp  \
+		--disable-smb  \
+		--disable-smtp  \
+		--disable-telnet  \
+		--disable-tftp  \
+		--without-libidn  \
+		--without-librtmp  \
+		--without-libssh2  \
+		--disable-shared \
+		--without-ca-bundle --without-ca-path \
+		--enable-threaded-resolver \
+		ac_cv_header_sys_poll_h=no \
+		$(LOGBUILD)
+	@echo "Building curl for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/curl; \
+		$(LIBCURL_ENV) $(ENV) $(MAKE) lib $(LOGBUILD) ; \
+		$(MAKE_INSTALL) $(LOGBUILD)
+
+curl: $(BUILD)/lib/libcurl.a

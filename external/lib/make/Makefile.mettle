@@ -1,0 +1,96 @@
+include make/Makefile.curl
+include make/Makefile.json-c
+include make/Makefile.libdnet
+include make/Makefile.libev
+include make/Makefile.libeio
+include make/Makefile.libreflect
+include make/Makefile.linenoise
+include make/Makefile.libsigar
+include make/Makefile.libz
+include make/Makefile.mbedtls
+
+# used by extensions
+include make/Makefile.libpcap
+
+$(ROOT)/mettle/configure: $(ROOT)/mettle/configure.ac
+	@mkdir -p $(BUILD)
+	@cd $(ROOT)/mettle; \
+		autoreconf -i $(LOGBUILD)
+
+METTLE_DEPS =
+METTLE_TARGETS =
+METTLE_OPTS =
+
+ifneq (,$(findstring darwin,$(BUILD)))
+    METTLE_DEPS += $(BUILD)/lib/libpcap.a
+    ifneq (,$(findstring iphone,$(BUILD)))
+        METTLE_TARGETS += $(BUILD)/bin/mettle.dylib
+        METTLE_TARGETS += $(BUILD)/bin/mettle.sha1.dylib
+    endif
+else
+    ifneq (,$(findstring mingw,$(BUILD)))
+        #METTLE_DEPS += $(BUILD)/lib/liblinenoise.a
+    else
+        METTLE_DEPS += $(BUILD)/lib/libpcap.a
+        ifneq "$(TARGET)" "native"
+            METTLE_TARGETS += $(BUILD)/bin/mettle.bin
+            METTLE_DEPS += $(BUILD)/lib/libmbedtls.a
+            METTLE_DEPS += libreflect
+
+            # TODO: enable static PIE when supported by a native build as well
+            METTLE_OPTS += --enable-staticpie
+        else
+            ifeq "$(shell uname -s)" "Linux"
+                METTLE_DEPS += libreflect
+            endif
+        endif
+        ifneq (,$(findstring x86_64,$(TARGET)))
+            CFLAGS += -Wl,-z,max-page-size=4096
+        endif
+    endif
+endif
+
+$(BUILD)/mettle/Makefile: $(TOOLS) $(ROOT)/mettle/configure \
+	$(METTLE_DEPS) \
+	$(BUILD)/lib/libjson-c.a \
+	$(BUILD)/lib/libcurl.a \
+	$(BUILD)/lib/libeio.a \
+	$(BUILD)/lib/libev.a \
+	$(BUILD)/lib/libsigar.a \
+	$(BUILD)/lib/libdnet.a
+	@echo "Configuring mettle for $(TARGET)"
+	@mkdir -p $(BUILD)/mettle
+	@$(SETUP_BUILDENV) cd $(BUILD)/mettle; \
+		$(ENV) $(ROOT)/mettle/$(CONFIGURE) $(METTLE_OPTS) $(LOGBUILD)
+
+$(BUILD)/bin/mettle.built: $(BUILD)/mettle/Makefile
+	@echo "Building mettle for $(TARGET)"
+	@rm -f build/$(TARGET_BUILD_DIR)/bin/*
+	@$(SETUP_BUILDENV) cd $(BUILD)/mettle; \
+		$(MAKE_INSTALL) $(LOGBUILD)
+
+$(BUILD)/bin/mettle.bin: $(BUILD)/bin/mettle.built
+	$(TOOLS)/bin/elf2bin $(BUILD)/bin/mettle $(BUILD)/bin/mettle.bin
+
+$(BUILD)/bin/mettle.dylib: $(BUILD)/bin/mettle.built
+	@./deps/app2dylib -o $(BUILD)/bin/mettle.dylib $(BUILD)/bin/mettle
+	@./deps/ldid2 -S $(BUILD)/bin/mettle.dylib
+
+$(BUILD)/bin/mettle.sha1.dylib: $(BUILD)/bin/mettle.built
+	@./deps/app2dylib -o $(BUILD)/bin/mettle.sha1.dylib $(BUILD)/bin/mettle
+	@./deps/ldid -S $(BUILD)/bin/mettle.sha1.dylib
+ifneq (,$(findstring arm-iphone,$(BUILD)))
+	@./deps/ldid -Sdeps/ent.xml $(BUILD)/bin/mettle
+endif
+
+mettle: $(BUILD)/bin/mettle.built $(METTLE_TARGETS)
+
+DATADIR:=../metasploit-framework/data
+METTLEDIR:=$(DATADIR)/mettle
+
+install: mettle
+	@mkdir -p $(METTLEDIR)/$(TARGET_BUILD_DIR)/bin/
+	@cp build/$(TARGET_BUILD_DIR)/bin/* $(METTLEDIR)/$(TARGET_BUILD_DIR)/bin/
+
+uninstall:
+	@rm -rf $(METTLEDIR)/$(TARGET_BUILD_DIR)

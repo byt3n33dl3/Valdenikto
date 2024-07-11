@@ -1,0 +1,23 @@
+JSON_C_VERSION=0.12.99
+
+$(BUILD)/json-c/configure:
+	@echo "Unpacking json-c for $(TARGET)"
+	@mkdir -p $(BUILD)
+	@cd $(BUILD); \
+		rm -fr $(BUILD)/json-c; \
+		$(TAR) zxf $(DEPS)/json-c-$(JSON_C_VERSION).tar.gz; \
+		mv json-c-$(JSON_C_VERSION) json-c
+
+$(BUILD)/json-c/Makefile: $(TOOLS) $(BUILD)/json-c/configure
+	@echo "Configuring json-c for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/json-c; \
+		$(CONFIG_FIXUP) \
+		$(ENV) ./$(CONFIGURE) $(LOGBUILD)
+
+$(BUILD)/lib/libjson-c.a: $(BUILD)/json-c/Makefile
+	@echo "Building json-c for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/json-c; \
+		$(MAKE) $(LOGBUILD) ; \
+		$(MAKE_INSTALL) $(LOGBUILD)
+
+json-c: $(BUILD)/lib/libjson-c.a

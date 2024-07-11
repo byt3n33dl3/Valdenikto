@@ -1,2 +1,2 @@
-cd spy
+cd config
 loop

@@ -1,0 +1,23 @@
+LIBEIO_VERSION=1.0.2
+
+$(BUILD)/libeio/configure:
+	@echo "Unpacking libeio for $(TARGET)"
+	@mkdir -p $(BUILD)
+	@cd $(BUILD); \
+		rm -fr $(BUILD)/libeio; \
+		$(TAR) zxf $(DEPS)/libeio-$(LIBEIO_VERSION).tar.gz; \
+		mv libeio-$(LIBEIO_VERSION) libeio
+
+$(BUILD)/libeio/Makefile: $(TOOLS) $(BUILD)/libeio/configure $(LIBEIO_DEPS)
+	@echo "Configuring libeio for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/libeio; \
+		$(CONFIG_FIXUP) \
+		$(ENV) ./$(CONFIGURE) $(LOGBUILD)
+
+$(BUILD)/lib/libeio.a: $(BUILD)/libeio/Makefile
+	@echo "Building libeio for $(TARGET)"
+	@$(SETUP_BUILDENV) cd $(BUILD)/libeio; \
+		$(ENV) $(MAKE) $(LOGBUILD) ; \
+		$(MAKE_INSTALL) $(LOGBUILD)
+
+libeio: $(BUILD)/lib/libeio.a
