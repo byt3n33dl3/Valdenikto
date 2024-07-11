@@ -1,3 +1,5 @@
+# valdenikto
+
 ```shell
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠤⠤⠤⠄⠀⠒⠢⣄⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⡠⠐⢈⠄⠀⠀⠀⠀⠀⠀⠀⠀⢸⠓⠄⠀⠀⠀
@@ -19,11 +21,9 @@ V A L D E N I K T O - by pxcs && sullo
 
 ```
 
-# valdenikto
-
 **Buffed** Alien Scanner
 
-*Run* normally:
+Run **normally:**
 
 ```
 git clone https://github.com/pxcs/valdenikto
@@ -35,7 +35,7 @@ perl valdenikto.pl -h http://www.example.com
 ```
 
 
-Usage: 
+**Usage** : 
 valdenikto -h / -hh
 
 Basic usage:
@@ -137,5 +137,5 @@ Basic usage:
 
 # Thanks to:
 
--> Chris sullo
+- >Chris sullo
 - Gangsta Crew
