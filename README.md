@@ -21,7 +21,7 @@ V A L D E N I K T O - by pxcs && sullo
 
 ```
 
-**Buffed** Alien Scanner
+**Buffed** Alien - Web Scanner
 
 Run **normally:**
 
@@ -138,4 +138,4 @@ Basic usage:
 # Thanks to:
 
 - >Chris sullo ( for making nikto )
-- Gangsta Crew
+- GangstaCrew ( organization )
