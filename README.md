@@ -21,7 +21,7 @@ V A L D E N I K T O - by pxcs && sullo
 
 ```
 
-**Buffed** Alien - Web Scanner
+**Buffed** alien - Web scanner
 
 Run **normally:**
 
